@@ -1,0 +1,13 @@
+export(allModels)
+export(correlation)
+export(MHPlots)
+export(MHSampler)
+export(scatterPlot)
+export(simulateData)
+
+
+
+importFrom('graphics', 'abline', 'hist', 'legend', 'plot', 'points')
+importFrom('mvtnorm', 'rmvnorm')
+importFrom('stats', 'cor', 'dnorm', 'rnorm', 'runif', 'sd')
+importFrom('truncnorm', 'rtruncnorm', 'dtruncnorm')

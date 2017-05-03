@@ -1,0 +1,14 @@
+Package: dagrBeta3
+Type: Package
+Title: Generate and analyze data for direced acyclic graphs
+Version: 0.0.0
+Author: Evan A Martin, Audrey Fu
+Maintainer: Evan Martin <evanamartin@gmail.com>
+Description: Generates data gene expression and genotype data. Analyzes this data using a Metropolis Hastings algorithm.
+Depends:
+    R (>= 2.10)
+License: GPL-3
+LazyData: TRUE
+Imports:
+    mvtnorm,
+    truncnorm
