@@ -8,6 +8,8 @@
 # priorParameters - A list containing pairs of numbers for all possible parameters. The first number is the mean and the second number is the standard deviation. In the case of the priors for the standard deviations the two numbers are the shape and scale values.
 # proposalSD - a list containing values for the standard deviation for all possible parameters. In the case of the standard deviations the value represents the scale parameter.
 MHSampler <- function (nIterations = 100,
+                       burnIn = 0.2,
+                       thinned = 300,
                        model = 'model0',
                        data,
                        parameters = list(b0.1 = 0, b1.1 = 1, b0.2 = 0, b1.2 = 1, sd.1 = 1, sd.2 = 1, rho = 0.72),
@@ -125,7 +127,12 @@ MHSampler <- function (nIterations = 100,
 
   }
 
-  return (list(MCMatrix = MCMatrix,
+  # reduce the size of the MCMatrix according to the burnIn and thinned arguments.
+  # In the from argument of the seq function the + 1 is to keep the number of columns in  the MCMatrix the same as the number entered into the thinned argument if a zero is entered into the burnIn argument.
+  reducedMCMatrix <- MCMatrix[, seq(from = (nIterations * burnIn + 1), to = nIterations, length.out = thinned)]
+  
+  
+  return (list(MCMatrix = reducedMCMatrix,
                nAccepted = nAccepted))
 
 }
