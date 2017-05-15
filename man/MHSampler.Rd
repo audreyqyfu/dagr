@@ -10,12 +10,26 @@ Runs a Metropolis Hastings algorithm on a given set of data
 }
 
 \usage{
-MHSampler(nIterations = 100, model = 'model0', data, parameters = list(b0.1 = 0, b1.1 = 1, b0.2 = 0, b1.2 = 1, sd.1 = 1, sd.2 = 1, rho = 0.72), priorParameters = list(b0.1 = c(0, 1), b1.1 = c(0, 1), b0.2 = c(0, 1), b1.2 = c(0, 1), sd.1 = c(1, 1), sd.2 = c(1, 1), rho = c(0, 0.5)), proposalSD = list(b0.1 = 1, b1.1 = 1, b0.2 = 1, b1.2 = 1, sd.1 = 1, sd.2 = 1, rho = 0.5))
+MHSampler(nIterations = 100, model = 'model0',
+          burnIn = 0.2,
+          thinned = 300,
+          data,
+          parameters = list(b0.1 = 0, b1.1 = 1, b0.2 = 0, b1.2 = 1, sd.1 = 1, sd.2 = 1, rho = 0.72),
+          priorParameters = list(b0.1 = c(0, 1), b1.1 = c(0, 1), b0.2 = c(0, 1), b1.2 = c(0, 1), sd.1 = c(1, 1), sd.2 = c(1, 1), rho = c(0, 0.5)),
+          proposalSD = list(b0.1 = 1, b1.1 = 1, b0.2 = 1, b1.2 = 1, sd.1 = 1, sd.2 = 1, rho = 0.5))
 }
 
 \arguments{
   \item{nIterations}{
   Positive integer. The number of times to run the sampler
+  }
+
+  \item{burnIn}{
+  Real number between 0 and 1. The percentage of the Markov chain that will be discarded.
+  }
+
+  \item{thinned}{
+  Positive integer. The number that the Markov chain will be thinned to.
   }
 
   \item{model}{
@@ -52,7 +66,7 @@ MHSampler(nIterations = 100, model = 'model0', data, parameters = list(b0.1 = 0,
   }
 
   \item{priorParameters}{
-  List of seven. This is a list of means and standard deviations for the prior for each parameter.
+  List of seven. This is a list of means and standard deviations for the prior distribution of each parameter.
   }
 
   \item{proposalSD}{
@@ -68,8 +82,8 @@ Returns a list of two. The first element is the Markov Chain for each parameter.
 # Values used to simulate the data for model 3.
 actualValues <- list(b0.1 = 3.2, b1.1 = 1.7, b0.2 = 4.6, b1.2 = 3.1, sd.1 = 2.4, sd.2 = 0.9, rho = 0.72)
 
-# Number of times to run the MHSampler function.
-m <- 500
+# Number of iterations to run the MHSampler function.
+m <- 5000
 
 Model3 <- simulateData(N = 100,
                        p = 0.43,
@@ -78,9 +92,11 @@ Model3 <- simulateData(N = 100,
                        parameters = actualValues)
 
 Output3 <- MHSampler(nIterations = m,
-                      model = 'model0',
-                      data = Model3,
-                      parameters = list(b0.1 = 0, b1.1 = 1, b0.2 = 0, b1.2 = 1, sd.1 = 1, sd.2 = 1, rho = 0.72),
-                      priorParameters = list(b0.1 = c(0, 1), b1.1 = c(0, 1), b0.2 = c(0, 1), b1.2 = c(0, 1), sd.1 = c(1, 1), sd.2 = c(1, 1), rho = c(0, 0.5)),
-                      proposalSD = list(b0.1 = 1, b1.1 = 1, b0.2 = 1, b1.2 = 1, sd.1 = 1, sd.2 = 1, rho = 0.5))
+                     burnIn = 0.2,
+                     thinned = 200,
+                     model = 'model0',
+                     data = Model3,
+                     parameters = list(b0.1 = 0, b1.1 = 1, b0.2 = 0, b1.2 = 1, sd.1 = 1, sd.2 = 1, rho = 0.72),
+                     priorParameters = list(b0.1 = c(0, 1), b1.1 = c(0, 1), b0.2 = c(0, 1), b1.2 = c(0, 1), sd.1 = c(1, 1), sd.2 = c(1, 1), rho = c(0, 0.5)),
+                     proposalSD = list(b0.1 = 1, b1.1 = 1, b0.2 = 1, b1.2 = 1, sd.1 = 1, sd.2 = 1, rho = 0.5))
 }
