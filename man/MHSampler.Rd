@@ -75,7 +75,13 @@ MHSampler(nIterations = 100, model = 'model0',
 }
 
 \value{
-Returns a list of two. The first element is the Markov Chain for each parameter. The second element is a vector that shows how many times the proposed value for each parameter was accepted.
+Returns a list of two.
+\item{MCMatrix}{
+Matrix where each row is a Markov chain for a parameter in the specified model.
+}
+\item{nAccepted}{
+Vector that shows the number of times the proposed value for each parameter was accepted.
+}
 }
 
 \examples{
