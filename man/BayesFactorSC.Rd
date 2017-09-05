@@ -31,7 +31,7 @@ BayesFactorSC(firstModel = 'model0',
   Markov chain matrix of the parameters from the model specified in the firstModel argument. This is the first element in the list of the output from the MHSampler function.
   }
 
-  \item{secondModel}{
+  \item{secondMHOutput}{
   Markov chain matrix of the parameters from the model specified in the secondModel argument. This is the first element in the list of the output from the MHSampler function.
   }
 

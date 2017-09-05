@@ -1,4 +1,6 @@
 export(allModels)
+export(BayesFactorSC)
+export(BayesFactorHM)
 export(correlation)
 export(MHPlots)
 export(MHSampler)

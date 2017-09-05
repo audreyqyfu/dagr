@@ -10,9 +10,10 @@ Runs a Metropolis Hastings algorithm on a given set of data
 }
 
 \usage{
-MHSampler(nIterations = 100, model = 'model0',
+MHSampler(nIterations = 100,
           burnIn = 0.2,
           thinned = 300,
+          model = 'model0',
           data,
           parameters = list(b0.1 = 0, b1.1 = 1, b0.2 = 0, b1.2 = 1, sd.1 = 1, sd.2 = 1, rho = 0.72),
           priorParameters = list(b0.1 = c(0, 1), b1.1 = c(0, 1), b0.2 = c(0, 1), b1.2 = c(0, 1), sd.1 = c(1, 1), sd.2 = c(1, 1), rho = c(0, 0.5)),

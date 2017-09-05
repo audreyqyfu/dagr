@@ -9,48 +9,48 @@
 # log - A logical argument indicating wether the results are reported on the log scale or the normal scale.
 BayesFactorHM <- function (firstModel = 'model0',
                            secondModel = 'model1',
-                           data,
                            firstMHOutput,
                            secondMHOutput,
+                           data,
                            log = FALSE) {
-  
+
   # generate a value that is close to the log likelihood of the two models
   logA <- -(calcLogLikelihood(model = firstModel,
                               data = data,
                               currentValues = firstMHOutput) + 50)
-  
+
   # Sum the likelihood for each column of the Markov chain matrix for the first model
   sumLikelihood1 <- 0
   for (e in 1:length(firstMHOutput[1, ])) {
-    
+
     sumLikelihood1 <- sumLikelihood1 + (1 / exp(logA + calcLogLikelihood(model = firstModel,
                                                                          data = data,
                                                                          currentValues = firstMHOutput[, e])))
-    
+
   }
-  
+
   harmonicSum1 <- 1 / sumLikelihood1
-  
+
   # Sum the likelihood for each column of the Markov chain matrix for the second model
   sumLikelihood2 <- 0
   for (v in 1:length(firstMHOutput[1, ])) {
-    
+
     sumLikelihood2 <- sumLikelihood2 + (1 / exp(logA + calcLogLikelihood(model = secondModel,
                                                                          data = data,
                                                                          currentValues = secondMHOutput[, v])))
-    
+
   }
-  
+
   harmonicSum2 <- 1 / sumLikelihood2
-  
+
   if (log == TRUE) {
-    
+
     return (log(harmonicSum1) - log(harmonicSum2))
-    
+
   } else {
-    
+
     return (harmonicSum1 / harmonicSum2)
-    
+
   }
-  
+
 }
